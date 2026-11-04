@@ -1,7 +1,13 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 export default function BlobBackground() {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return null;
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
       {/* Top Left Soft Tint */}
@@ -9,29 +15,27 @@ export default function BlobBackground() {
         animate={{
           x: [0, 20, 0],
           y: [0, -20, 0],
-          scale: [1, 1.05, 1],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute -top-[15%] -left-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-blue-100/60 to-surface/40 blur-3xl opacity-70"
+        className="absolute -top-[15%] -left-[10%] w-[500px] h-[500px] rounded-full bg-surface/40 blur-3xl"
       />
 
       {/* Center Right Soft Tint */}
       <motion.div
         animate={{
-          x: [0, -25, 0],
-          y: [0, 25, 0],
-          scale: [1, 1.08, 1],
+          x: [0, -20, 0],
+          y: [0, 20, 0],
         }}
         transition={{
-          duration: 15,
+          duration: 14,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute top-[20%] -right-[15%] w-[550px] h-[550px] rounded-full bg-gradient-to-bl from-surface/50 to-blue-200/40 blur-3xl opacity-60"
+        className="absolute top-[20%] -right-[15%] w-[550px] h-[550px] rounded-full bg-surface/30 blur-3xl"
       />
     </div>
   );

@@ -34,7 +34,7 @@ export default function OverRibbon() {
                 : { scale: 0.6, opacity: 0.2 }
             }
             transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-mono select-none ${ball.bg}`}
+            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs tabular-nums select-none ${ball.bg}`}
           >
             {ball.val}
           </motion.div>

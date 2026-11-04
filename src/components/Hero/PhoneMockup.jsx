@@ -15,7 +15,7 @@ export default function PhoneMockup() {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="relative w-[300px] sm:w-[330px] rounded-[44px] p-3 bg-white border-[6px] border-slate-800 shadow-2xl select-none"
+        className="relative w-[300px] sm:w-[330px] rounded-[44px] p-3 bg-white border-[6px] border-slate-800 select-none"
       >
         {/* Dynamic Island / Notch */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-full z-20 flex items-center justify-end px-2">
@@ -23,7 +23,7 @@ export default function PhoneMockup() {
         </div>
 
         {/* Screen Bezel */}
-        <div className="w-full bg-[#F1F6FF] rounded-[36px] overflow-hidden p-3.5 pt-7 text-ink flex flex-col justify-between font-sans shadow-inner min-h-[580px]">
+        <div data-ui="true" className="w-full bg-[#F1F6FF] rounded-[36px] overflow-hidden p-3.5 pt-7 text-ink flex flex-col justify-between font-sans min-h-[580px]">
           {/* Status Bar */}
           <div className="flex items-center justify-between text-[11px] font-semibold text-muted px-2 mb-2">
             <span>9:41</span>
@@ -39,11 +39,11 @@ export default function PhoneMockup() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>LIVE SCORING</span>
             </div>
-            <span className="text-[11px] font-mono text-muted">#ALPHA1</span>
+            <span className="text-[11px] font-semibold text-muted">#ALPHA1</span>
           </div>
 
           {/* Main Scorecard Card */}
-          <div className="bg-white rounded-2xl p-3 shadow-sm border border-border/80 mb-2.5">
+          <div className="bg-white rounded-2xl p-3 border border-border/80 mb-2.5">
             <div className="flex items-center justify-between text-[11px] font-semibold text-muted mb-1">
               <span>TEAM ALPHA • INNINGS 1</span>
               <span className="text-accent font-bold">VS TEAM BRAVO</span>
@@ -51,24 +51,24 @@ export default function PhoneMockup() {
             <div className="flex items-baseline justify-between mb-2">
               <ScoreTicker />
               <div className="text-right">
-                <span className="font-mono text-xl font-bold text-amber-500">0.2</span>
-                <span className="font-mono text-xs text-muted"> / 20 ov</span>
+                <span className="text-xl font-bold text-amber-500 tabular-nums">0.2</span>
+                <span className="text-xs text-muted tabular-nums"> / 20 ov</span>
               </div>
             </div>
             <div className="w-full bg-surface/60 rounded-full h-1.5 overflow-hidden mb-2">
               <div className="bg-emerald-500 h-full w-[25%]" />
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted font-medium pt-1 border-t border-border/50">
-              <span>CRR: <strong className="text-ink font-mono">18.0</strong></span>
-              <span>Projected: <strong className="text-ink font-mono">360</strong></span>
+              <span>CRR: <strong className="text-ink tabular-nums">18.0</strong></span>
+              <span>Projected: <strong className="text-ink tabular-nums">360</strong></span>
             </div>
           </div>
 
           {/* Batters Card */}
-          <div className="bg-white rounded-2xl p-3 shadow-sm border border-border/80 mb-2.5 space-y-2">
+          <div className="bg-white rounded-2xl p-3 border border-border/80 mb-2.5 space-y-2">
             <div className="flex items-center justify-between text-[10px] uppercase font-bold text-muted border-b border-border/50 pb-1">
               <span>Batter</span>
-              <div className="flex gap-2.5 text-right font-mono">
+              <div className="flex gap-2.5 text-right tabular-nums">
                 <span className="w-4">R</span>
                 <span className="w-4">B</span>
                 <span className="w-4">4s</span>
@@ -83,7 +83,7 @@ export default function PhoneMockup() {
                 <span>Maaz</span>
                 <span className="text-accent font-bold">*</span>
               </div>
-              <div className="flex gap-2.5 text-right font-mono text-xs">
+              <div className="flex gap-2.5 text-right tabular-nums text-xs">
                 <span className="w-4 font-bold text-ink">6</span>
                 <span className="w-4 text-muted">1</span>
                 <span className="w-4 text-muted">0</span>
@@ -97,7 +97,7 @@ export default function PhoneMockup() {
                 <User className="w-3.5 h-3.5 text-slate-400" />
                 <span>Hassan</span>
               </div>
-              <div className="flex gap-2.5 text-right font-mono text-xs">
+              <div className="flex gap-2.5 text-right tabular-nums text-xs">
                 <span className="w-4">0</span>
                 <span className="w-4">0</span>
                 <span className="w-4">0</span>
@@ -108,10 +108,10 @@ export default function PhoneMockup() {
           </div>
 
           {/* Current Bowler Card */}
-          <div className="bg-white rounded-2xl p-3 shadow-sm border border-border/80 mb-2.5">
+          <div className="bg-white rounded-2xl p-3 border border-border/80 mb-2.5">
             <div className="flex items-center justify-between text-[10px] uppercase font-bold text-muted border-b border-border/50 pb-1 mb-1.5">
               <span>Bowler</span>
-              <div className="flex gap-2.5 text-right font-mono">
+              <div className="flex gap-2.5 text-right tabular-nums">
                 <span className="w-5">O</span>
                 <span className="w-5">M</span>
                 <span className="w-5">R</span>
@@ -120,7 +120,7 @@ export default function PhoneMockup() {
             </div>
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-accent">Abdullah</span>
-              <div className="flex gap-2.5 text-right font-mono text-xs">
+              <div className="flex gap-2.5 text-right tabular-nums text-xs">
                 <span className="w-5">0.2</span>
                 <span className="w-5">0</span>
                 <span className="w-5">6</span>
@@ -130,7 +130,7 @@ export default function PhoneMockup() {
           </div>
 
           {/* Recent Deliveries */}
-          <div className="bg-white rounded-2xl p-3 shadow-sm border border-border/80 mb-2">
+          <div className="bg-white rounded-2xl p-3 border border-border/80 mb-2">
             <div className="flex items-center justify-between text-[11px] font-semibold text-muted mb-1">
               <span>Recent Deliveries</span>
               <span className="text-[10px] text-muted font-mono">2 balls</span>

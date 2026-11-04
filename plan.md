@@ -281,7 +281,7 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
   - Wire dynamic `versionName`, `releaseDate`, `fileSize`, `apkUrl` into CTA + Hero badge
   - Verify: Firestore read works; download button writes to `downloads` collection; dedup skips duplicate within 24h; apk opens even if Firestore write fails
 
-- [ ] **Phase 5** — README + deploy steps + manual checklist
+- [x] **Phase 5** — README + deploy steps + manual checklist
   - `README.md` with: local dev setup, Firebase multi-site setup commands, deploy commands, Firestore rules to deploy, manual steps before launch
   - Checklist: OG image upload, Firestore `config/latestRelease` doc creation, APK upload to GitHub Releases and URL update, hosting target verification
 

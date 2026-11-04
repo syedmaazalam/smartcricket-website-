@@ -15,7 +15,7 @@ export default function App() {
   const { handleDownload } = useDownload(releaseData);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-ink font-sans">
+    <div className="min-h-screen flex flex-col bg-background text-ink font-sans overflow-x-clip">
       <ScrollProgress />
       <Navbar releaseData={releaseData} onDownload={handleDownload} />
       <main className="flex-1">

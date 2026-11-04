@@ -92,7 +92,7 @@ export default function ScreenshotCarousel() {
               }`}
             >
               {/* Phone Frame wrapper with fixed aspect ratio to prevent CLS */}
-              <div className="relative w-full aspect-[9/19] rounded-[28px] overflow-hidden bg-slate-900 border-[4px] border-slate-800 shadow-md mb-4 flex items-center justify-center">
+              <div className="relative w-full aspect-[9/19] rounded-[28px] overflow-hidden bg-slate-900 border-[4px] border-slate-800 mb-4 flex items-center justify-center">
                 {/* Simulated Screen with Lazy Loading Image */}
                 <img
                   src={item.file}
