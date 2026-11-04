@@ -262,7 +262,7 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
   - Build `FeaturesSection.jsx` + `FeatureCard.jsx` (6 cards, stagger, hover effects, cursor spotlight)
   - Verify: hero looks correct at all 3 widths; phone mockup floats; LIVE dot pulses; cards stagger in
 
-- [ ] **Phase 3** — See it in action + Install + FAQ + CTA + Privacy & Terms pages + animations + responsive pass + SEO
+- [x] **Phase 3** — See it in action + Install + FAQ + CTA + Privacy & Terms pages + animations + responsive pass + SEO
   - Build `SeeInActionSection.jsx` + `ScreenshotCarousel.jsx` (swipeable carousel, desktop arrow buttons, mobile drag, phone frames, captions, lazy loading, fixed dimensions, placeholder frames)
   - Build `InstallSection.jsx`, `StepCard.jsx` (including Play Protect / Chrome warning notice on Step 2), `ConnectorLine.jsx`
   - Build `FAQSection.jsx`, `FAQItem.jsx`
