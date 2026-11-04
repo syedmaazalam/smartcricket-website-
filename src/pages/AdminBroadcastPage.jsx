@@ -17,10 +17,10 @@ import { doc, setDoc } from 'firebase/firestore';
 export default function AdminBroadcastPage({ releaseData }) {
   const [versionName, setVersionName] = useState(releaseData?.versionName || '1.1');
   const [versionCode, setVersionCode] = useState((releaseData?.versionCode || 1) + 1);
-  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '4.4 MB');
+  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '4.85 MB');
   const [apkUrl, setApkUrl] = useState(
     releaseData?.apkUrl ||
-      'https://drive.usercontent.google.com/download?id=1ddi2Wws_dbTjswFrdqB2DK6FgzpB1341&export=download&confirm=t'
+      'https://github.com/syedmaazalam/cricket-scorer/releases/download/v1.0/SmartCricket.apk'
   );
   const [alertMessage, setAlertMessage] = useState(
     'Time to update SmartCricket! Install the latest build for enhanced match scorecards and faster live sync.'

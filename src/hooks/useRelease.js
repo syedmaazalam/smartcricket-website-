@@ -4,10 +4,10 @@ import { getLatestRelease } from '../lib/firestore';
 const STATIC_FALLBACK_RELEASE = {
   versionCode: 1,
   versionName: '1.0',
-  fileSize: '4.4 MB',
+  fileSize: '4.85 MB',
   releaseDate: 'November 2026',
-  apkUrl: 'https://drive.usercontent.google.com/download?id=1ddi2Wws_dbTjswFrdqB2DK6FgzpB1341&export=download&confirm=t',
-  notes: 'Complete offline-first scoring engine, real-time live match streaming, and MCC law compliance.',
+  apkUrl: 'https://github.com/syedmaazalam/cricket-scorer/releases/download/v1.0/SmartCricket.apk',
+  notes: 'Complete offline-first scoring engine, real-time live match streaming, native scorecard PNG export with Top Performer MVP, and MCC law compliance.',
   force: false,
 };
 
