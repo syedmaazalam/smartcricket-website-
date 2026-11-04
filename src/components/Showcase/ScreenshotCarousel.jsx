@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { buttonHover, buttonTap } from '../../lib/motion';
 
@@ -7,32 +7,32 @@ const screens = [
   {
     id: 'scoring',
     file: '/screenshots/scoring.png',
-    title: 'Ball-by-Ball Scoring',
-    caption: 'Dedicated run keypad with one-tap extras, dismissal wizard, and live over ribbon.',
+    title: 'Ball-by-Ball Live Scoring',
+    caption: 'Dedicated scoring pad with active batter strike rate, bowler figures, and delivery ribbon.',
   },
   {
     id: 'live',
     file: '/screenshots/live.png',
-    title: 'Instant Spectator Streaming',
-    caption: 'Fans view real-time scores, CRR, and over commentary on any browser without login.',
+    title: 'Head-to-Head Comparison',
+    caption: 'Side-by-side innings summary, boundaries breakdown, dot balls, and extras conceded.',
   },
   {
     id: 'scorecard',
     file: '/screenshots/scorecard.png',
-    title: 'In-Depth Scorecards & Charts',
-    caption: 'Full batting/bowling ledgers, Worm score progression curves, and Run Rate charts.',
+    title: 'Over-by-Over Breakdown',
+    caption: 'Clear bar charts displaying runs per over, wicket deliveries, and current run rate (CRR).',
   },
   {
     id: 'poster',
     file: '/screenshots/poster.png',
-    title: 'Broadcast-Quality Posters',
-    caption: 'One-tap 1080p and 1920p summary graphic with team crests and balanced 2×2 stats.',
+    title: 'Interactive Match Analytics',
+    caption: 'Dynamic Run Rate and Worm progression curves highlighting match momentum shifts.',
   },
   {
     id: 'home',
     file: '/screenshots/home.png',
-    title: 'Fast Match Setup',
-    caption: 'Configure overs, custom squads, toss decisions, and unique 6-character match codes.',
+    title: 'Team Squads & Player Status',
+    caption: 'Real-time squad rosters, individual balls faced, batting order, and dismissal tracking.',
   },
 ];
 
@@ -81,13 +81,13 @@ export default function ScreenshotCarousel() {
           return (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              transition={{ duration: 0.45, delay: idx * 0.06 }}
               className={`snap-center shrink-0 w-[260px] sm:w-[290px] flex flex-col justify-between rounded-3xl p-4 bg-white border transition-all duration-300 ${
                 isFeatured
-                  ? 'border-accent shadow-lift ring-2 ring-accent/10'
+                  ? 'border-accent ring-2 ring-accent/15'
                   : 'border-border hover:border-secondary'
               }`}
             >
@@ -102,7 +102,6 @@ export default function ScreenshotCarousel() {
                   height="590"
                   className="w-full h-full object-cover object-top select-none"
                   onError={(e) => {
-                    // Fallback to placeholder if image fails to load
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'flex';
                   }}
@@ -113,7 +112,7 @@ export default function ScreenshotCarousel() {
                     <Eye className="w-5 h-5" />
                   </div>
                   <span className="font-semibold text-xs text-ink">{item.title}</span>
-                  <span className="text-[10px] text-muted mt-1 font-mono">public{item.file}</span>
+                  <span className="text-xs text-muted mt-1 font-mono">public{item.file}</span>
                 </div>
               </div>
 
@@ -122,7 +121,7 @@ export default function ScreenshotCarousel() {
                 <h3 className="font-display font-bold text-base text-ink">
                   {item.title}
                 </h3>
-                <p className="text-xs text-muted leading-relaxed min-h-[36px]">
+                <p className="text-sm text-muted leading-relaxed min-h-[40px]">
                   {item.caption}
                 </p>
               </div>
