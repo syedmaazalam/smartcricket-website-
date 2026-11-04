@@ -1,29 +1,47 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function PrivacyPage() {
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
   return (
-    <div className="pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -24 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className="pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto"
+    >
       <Link
         to="/"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline mb-8"
+        onClick={() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }}
+        className="group inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover mb-8 transition-colors min-h-[44px]"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1.5 duration-200" />
         <span>Back to SmartCricket</span>
       </Link>
 
-      <div className="bg-card rounded-2xl border border-border p-8 sm:p-12 shadow-soft space-y-6">
+      <div className="bg-card rounded-2xl border border-border p-8 sm:p-12 space-y-6">
         <div className="flex items-center gap-3 text-accent mb-2">
           <Shield className="w-6 h-6" />
-          <span className="text-xs font-bold uppercase tracking-wider">Privacy Policy</span>
+          <span className="text-sm font-bold uppercase tracking-wider">Privacy Policy</span>
         </div>
 
         <h1 className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight">
           Privacy Policy
         </h1>
-        <p className="text-xs text-muted font-mono">
+        <p className="text-sm text-muted font-mono">
           Draft, last updated November 5, 2026
         </p>
 
@@ -76,6 +94,6 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

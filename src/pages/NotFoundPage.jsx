@@ -28,6 +28,11 @@ export default function NotFoundPage() {
           <motion.div whileHover={buttonHover} whileTap={buttonTap} className="inline-block">
             <Link
               to="/"
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+              }}
               className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-xl bg-accent text-white font-semibold text-sm shadow-md hover:bg-accent-hover transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />

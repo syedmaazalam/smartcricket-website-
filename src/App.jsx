@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
+import ScrollToTop from './components/ScrollToTop';
+import BackToTopButton from './components/BackToTopButton';
 import Home from './pages/Home';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
@@ -16,6 +18,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-ink font-sans overflow-x-clip">
+      <ScrollToTop />
       <ScrollProgress />
       <Navbar releaseData={releaseData} onDownload={handleDownload} />
       <main className="flex-1">
@@ -36,6 +39,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <BackToTopButton />
     </div>
   );
 }
