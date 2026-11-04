@@ -6,7 +6,7 @@ import BlobBackground from './BlobBackground';
 import QrCodeModal from '../ui/QrCodeModal';
 import { buttonHover, buttonTap } from '../../lib/motion';
 
-export default function HeroSection({ releaseData, onDownload }) {
+export default function HeroSection({ releaseData, loading, onDownload }) {
   const version = releaseData?.versionName || '1.0';
   const fileSize = releaseData?.fileSize || '4.4 MB';
   const apkUrl = releaseData?.apkUrl;
@@ -34,7 +34,11 @@ export default function HeroSection({ releaseData, onDownload }) {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-secondary/30 text-ink text-xs font-semibold"
             >
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span>v{version} Release • Android 7.0+</span>
+              {loading ? (
+                <span className="w-24 h-3.5 bg-secondary/30 rounded animate-pulse" />
+              ) : (
+                <span>v{version} Release • Android 7.0+</span>
+              )}
             </motion.div>
 
             {/* Headline */}

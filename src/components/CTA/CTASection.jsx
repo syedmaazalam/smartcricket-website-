@@ -4,7 +4,7 @@ import { ArrowDownToLine, Smartphone, ShieldCheck } from 'lucide-react';
 import QrCodeModal from '../ui/QrCodeModal';
 import { buttonHover, buttonTap } from '../../lib/motion';
 
-export default function CTASection({ releaseData, onDownload }) {
+export default function CTASection({ releaseData, loading, onDownload }) {
   const version = releaseData?.versionName || '1.0';
   const fileSize = releaseData?.fileSize || '4.4 MB';
   const apkUrl = releaseData?.apkUrl;
@@ -81,7 +81,11 @@ export default function CTASection({ releaseData, onDownload }) {
             <span>•</span>
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              Version {version} ({fileSize})
+              {loading ? (
+                <span className="w-20 h-3 bg-slate-200 rounded animate-pulse" />
+              ) : (
+                <span>Version {version} ({fileSize})</span>
+              )}
             </span>
             <span>•</span>
             <span>No account required to score</span>

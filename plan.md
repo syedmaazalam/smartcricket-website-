@@ -273,7 +273,7 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
   - SEO: `<title>`, `<meta description>`, Open Graph, Twitter Card, favicon
   - Verify: `vite build && vite preview` — 0 layout shift, all sections visible at 390/768/1440
 
-- [ ] **Phase 4** — Firebase integration
+- [x] **Phase 4** — Firebase integration
   - `lib/firebase.js` — `initializeApp` with `smartcricket-c79b5` config
   - `lib/firestore.js` — `getDoc`, `addDoc` wrappers
   - `hooks/useRelease.js` — reads `config/latestRelease`, skeleton while loading, offline fallback (GitHub release URL placeholder)

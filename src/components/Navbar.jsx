@@ -4,11 +4,17 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Download, ShieldCheck, Eye, Layers, HelpCircle, ArrowDownToLine } from 'lucide-react';
 import { buttonHover, buttonTap } from '../lib/motion';
 
-export default function Navbar() {
+export default function Navbar({ releaseData, onDownload }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const location = useLocation();
+
+  const handleDownloadClick = (e) => {
+    if (onDownload) {
+      onDownload(e);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,8 +116,8 @@ export default function Navbar() {
           {/* Right Action: Download Button & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <motion.a
-              href="#download"
-              onClick={(e) => handleNavClick(e, '/#download')}
+              href={releaseData?.apkUrl || '#download'}
+              onClick={handleDownloadClick}
               whileHover={buttonHover}
               whileTap={buttonTap}
               className="hidden sm:inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] min-w-[44px] rounded-xl bg-accent text-white text-sm font-semibold hover:bg-accent-hover transition-colors group focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
@@ -184,8 +190,11 @@ export default function Navbar() {
               {/* Bottom CTA in Drawer */}
               <div className="pt-6">
                 <motion.a
-                  href="#download"
-                  onClick={(e) => handleNavClick(e, '/#download')}
+                  href={releaseData?.apkUrl || '#download'}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    handleDownloadClick(e);
+                  }}
                   whileTap={buttonTap}
                   className="flex items-center justify-center gap-2 w-full py-3.5 min-h-[44px] rounded-xl bg-accent text-white font-semibold text-center hover:bg-accent-hover transition-colors"
                 >

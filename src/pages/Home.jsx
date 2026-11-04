@@ -6,15 +6,15 @@ import InstallSection from '../components/Install/InstallSection';
 import FAQSection from '../components/FAQ/FAQSection';
 import CTASection from '../components/CTA/CTASection';
 
-export default function Home({ releaseData, onDownload }) {
+export default function Home({ releaseData, loading, onDownload }) {
   return (
     <div>
-      <HeroSection releaseData={releaseData} onDownload={onDownload} />
+      <HeroSection releaseData={releaseData} loading={loading} onDownload={onDownload} />
       <FeaturesSection />
       <SeeInActionSection />
       <InstallSection />
       <FAQSection />
-      <CTASection releaseData={releaseData} onDownload={onDownload} />
+      <CTASection releaseData={releaseData} loading={loading} onDownload={onDownload} />
     </div>
   );
 }
