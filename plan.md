@@ -287,6 +287,31 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
 
 ---
 
+## Phase 6 — Functional QR, Match Deep Linking & Update Notification System
+
+- [x] **Chunk 6.1** — Workable QR Code Generator (`src/components/ui/QrCodeModal.jsx`)
+  - Replace static mock rectangles with dynamic, high-contrast, camera-scannable QR code generator using `qrcode`
+  - Encodes live URL `https://smartcricket-website.web.app` and direct APK download URL
+  - Add quick toggle between "Open Website" and "Direct Download APK"
+  - Verify with QR decode script and build test
+
+- [x] **Chunk 6.2** — Match URL Deep Link Router & Scroll-Gated Match Landing Page (`src/pages/MatchPage.jsx`)
+  - Route `/match/:matchId` and `/m/:matchId`
+  - Try deep link: `smartcricket://match/:matchId` (and Android Intent URI) to open the APK if installed on phone
+  - If app not installed / on web: render Match Landing Page
+  - NO download button at top; display live match telemetry teaser & score preview
+  - User must scroll down through match overview and app capabilities to reveal & activate the APK Download button at the bottom
+  - Verify route handling and scroll requirement
+
+- [x] **Chunk 6.3** — App Update Notification System (`src/components/ui/UpdateNotificationModal.jsx`, `src/pages/AdminBroadcastPage.jsx`)
+  - Listen to `config/latestRelease` in Firestore (or local state)
+  - Display non-intrusive Update Alert Banner / Modal when a newer version exists
+  - Add Manager Update Broadcast tool at `/admin/broadcast` to let manager publish update notices with custom message & force toggle
+  - Add documentation in `docs/in-app-update-integration.md` for Android / Flutter mobile app integration
+  - Verify build and deploy to Firebase Hosting
+
+---
+
 ## Open Questions for User (answer before "next" on Phase 1)
 
 1. **Hosting target name**: I'll use `smartcricket-website` (URL: `smartcricket-website.web.app`). Confirm or change.

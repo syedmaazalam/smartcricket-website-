@@ -9,6 +9,9 @@ import Home from './pages/Home';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import MatchLandingPage from './pages/MatchLandingPage';
+import AdminBroadcastPage from './pages/AdminBroadcastPage';
+import UpdateNotificationBanner from './components/ui/UpdateNotificationBanner';
 import { useRelease } from './hooks/useRelease';
 import { useDownload } from './hooks/useDownload';
 
@@ -20,6 +23,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-background text-ink font-sans overflow-x-clip">
       <ScrollToTop />
       <ScrollProgress />
+      <UpdateNotificationBanner releaseData={releaseData} onDownload={handleDownload} />
       <Navbar releaseData={releaseData} onDownload={handleDownload} />
       <main className="flex-1">
         <Routes>
@@ -32,6 +36,32 @@ export default function App() {
                 onDownload={handleDownload}
               />
             }
+          />
+          <Route
+            path="/match/:matchId"
+            element={
+              <MatchLandingPage
+                releaseData={releaseData}
+                onDownload={handleDownload}
+              />
+            }
+          />
+          <Route
+            path="/m/:matchId"
+            element={
+              <MatchLandingPage
+                releaseData={releaseData}
+                onDownload={handleDownload}
+              />
+            }
+          />
+          <Route
+            path="/admin/broadcast"
+            element={<AdminBroadcastPage releaseData={releaseData} />}
+          />
+          <Route
+            path="/broadcast"
+            element={<AdminBroadcastPage releaseData={releaseData} />}
           />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />

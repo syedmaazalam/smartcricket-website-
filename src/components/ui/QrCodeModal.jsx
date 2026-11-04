@@ -1,13 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { QrCode, X, Smartphone, ArrowDownToLine } from 'lucide-react';
+import { QrCode, X, Smartphone, Check, Copy, ArrowDownToLine, Globe } from 'lucide-react';
+import QRCode from 'qrcode';
 import { buttonHover, buttonTap } from '../../lib/motion';
 
 export default function QrCodeModal({ apkUrl }) {
   const [isOpen, setIsOpen] = useState(false);
-  const downloadUrl = apkUrl || 'https://smartcricket-website.web.app';
+  const [qrMode, setQrMode] = useState('download'); // 'download' | 'website'
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // SVG representation of a clean QR Code pointing to the download URL
+  const websiteUrl = 'https://smartcricket-website.web.app';
+  const downloadUrl = apkUrl || 'https://drive.usercontent.google.com/download?id=1ddi2Wws_dbTjswFrdqB2DK6FgzpB1341&export=download&confirm=t';
+  const targetUrl = qrMode === 'download' ? downloadUrl : websiteUrl;
+
+  useEffect(() => {
+    let isCurrent = true;
+    async function generateQR() {
+      try {
+        setLoading(true);
+        const dataUrl = await QRCode.toDataURL(targetUrl, {
+          width: 360,
+          margin: 2,
+          color: {
+            dark: '#0B1F3B',
+            light: '#FFFFFF',
+          },
+          errorCorrectionLevel: 'M',
+        });
+        if (isCurrent) {
+          setQrCodeDataUrl(dataUrl);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error('Failed to generate QR Code:', err);
+        if (isCurrent) setLoading(false);
+      }
+    }
+
+    if (isOpen) {
+      generateQR();
+    }
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [targetUrl, isOpen]);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(targetUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <>
       <motion.button
@@ -54,63 +100,82 @@ export default function QrCodeModal({ apkUrl }) {
               </div>
 
               <h3 className="font-display font-bold text-xl text-ink mb-1">
-                Scan to Download APK
+                Scan with Phone Camera
               </h3>
-              <p className="text-sm text-muted mb-4">
-                Point your phone's camera at the code below to open the download link directly on your Android device.
+              <p className="text-xs text-muted mb-4 max-w-xs mx-auto">
+                Works with any camera app, Google Lens, or QR scanner to open on Android.
               </p>
 
-              {/* QR Code Container */}
-              <div className="bg-surface/50 p-4 rounded-2xl inline-block border border-border mb-4">
-                <svg
-                  className="w-48 h-48 mx-auto"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              {/* Toggle Switch between Direct APK & Website */}
+              <div className="flex items-center p-1 bg-surface/60 rounded-xl mb-4 border border-border/50 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setQrMode('download')}
+                  className={`flex-1 py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 transition-all min-h-[36px] ${
+                    qrMode === 'download'
+                      ? 'bg-white text-ink shadow-xs'
+                      : 'text-muted hover:text-ink'
+                  }`}
                 >
-                  <rect width="100" height="100" rx="8" fill="white" />
-                  {/* Top-left marker */}
-                  <rect x="10" y="10" width="24" height="24" rx="4" fill="#0B1F3B" />
-                  <rect x="14" y="14" width="16" height="16" rx="2" fill="white" />
-                  <rect x="18" y="18" width="8" height="8" rx="1" fill="#2563EB" />
-                  {/* Top-right marker */}
-                  <rect x="66" y="10" width="24" height="24" rx="4" fill="#0B1F3B" />
-                  <rect x="70" y="14" width="16" height="16" rx="2" fill="white" />
-                  <rect x="74" y="18" width="8" height="8" rx="1" fill="#2563EB" />
-                  {/* Bottom-left marker */}
-                  <rect x="10" y="66" width="24" height="24" rx="4" fill="#0B1F3B" />
-                  <rect x="14" y="70" width="16" height="16" rx="2" fill="white" />
-                  <rect x="18" y="74" width="8" height="8" rx="1" fill="#2563EB" />
-                  {/* Data patterns */}
-                  <rect x="42" y="14" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="52" y="14" width="6" height="6" fill="#2563EB" />
-                  <rect x="42" y="24" width="6" height="6" fill="#2563EB" />
-                  <rect x="52" y="24" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="14" y="42" width="6" height="6" fill="#2563EB" />
-                  <rect x="24" y="42" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="14" y="52" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="24" y="52" width="6" height="6" fill="#2563EB" />
-                  <rect x="42" y="42" width="16" height="16" rx="2" fill="#2563EB" />
-                  <rect x="46" y="46" width="8" height="8" rx="1" fill="white" />
-                  <rect x="66" y="42" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="78" y="42" width="6" height="6" fill="#2563EB" />
-                  <rect x="66" y="52" width="6" height="6" fill="#2563EB" />
-                  <rect x="78" y="52" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="42" y="66" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="52" y="66" width="6" height="6" fill="#2563EB" />
-                  <rect x="42" y="76" width="6" height="6" fill="#2563EB" />
-                  <rect x="52" y="76" width="6" height="6" fill="#0B1F3B" />
-                  <rect x="66" y="66" width="8" height="8" fill="#2563EB" />
-                  <rect x="76" y="76" width="8" height="8" fill="#0B1F3B" />
-                </svg>
+                  <ArrowDownToLine className="w-3.5 h-3.5 text-accent" />
+                  <span>Download APK</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setQrMode('website')}
+                  className={`flex-1 py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 transition-all min-h-[36px] ${
+                    qrMode === 'website'
+                      ? 'bg-white text-ink shadow-xs'
+                      : 'text-muted hover:text-ink'
+                  }`}
+                >
+                  <Globe className="w-3.5 h-3.5 text-secondary" />
+                  <span>Open Website</span>
+                </button>
               </div>
 
-              <div className="text-xs text-muted flex items-center justify-center gap-2">
-                <span>Free download</span>
-                <span>•</span>
-                <span>4.4 MB</span>
-                <span>•</span>
-                <span>Direct APK</span>
+              {/* High-Resolution Scannable QR Code */}
+              <div className="bg-surface/30 p-3 rounded-2xl inline-block border border-border mb-4">
+                {loading || !qrCodeDataUrl ? (
+                  <div className="w-48 h-48 flex items-center justify-center bg-white rounded-xl">
+                    <span className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+                  </div>
+                ) : (
+                  <img
+                    src={qrCodeDataUrl}
+                    alt={`Scannable QR code to ${qrMode === 'download' ? 'download SmartCricket APK' : 'open SmartCricket website'}`}
+                    className="w-48 h-48 mx-auto rounded-xl bg-white shadow-xs"
+                  />
+                )}
+              </div>
+
+              {/* Copy Target Link Action */}
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 min-h-[40px] rounded-xl bg-surface/50 hover:bg-surface text-ink text-xs font-semibold transition-colors"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-emerald-700">Link Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-muted" />
+                      <span>Copy {qrMode === 'download' ? 'APK Download Link' : 'Website Link'}</span>
+                    </>
+                  )}
+                </button>
+
+                <div className="text-[11px] text-muted flex items-center justify-center gap-2">
+                  <span>Free download</span>
+                  <span>•</span>
+                  <span>4.4 MB</span>
+                  <span>•</span>
+                  <span>Android 8.0+</span>
+                </div>
               </div>
             </motion.div>
           </div>
