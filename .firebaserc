@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "smartcricket-c79b5"
+  },
+  "targets": {
+    "smartcricket-c79b5": {
+      "hosting": {
+        "smartcricket-website": [
+          "smartcricket-website"
+        ]
+      }
+    }
+  }
+}
