@@ -254,7 +254,7 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
   - Configure `.firebaserc` + `firebase.json` for separate hosting target (`smartcricket-website` in single config constant)
   - Verify: `vite build` succeeds, no console errors, navbar/footer render at 390/768/1440px
 
-- [ ] **Phase 2** — Hero section + Features section
+- [x] **Phase 2** — Hero section + Features section
   - Build `PhoneMockup.jsx` (CSS phone shell, light app interior matching new 6/1 screenshot)
   - Build `OverRibbon.jsx` (looping ball circles)
   - Build `ScoreTicker.jsx` (rolling digit score)
