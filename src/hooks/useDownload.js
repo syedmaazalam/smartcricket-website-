@@ -51,7 +51,14 @@ export function useDownload(releaseData) {
 
       // Start the download immediately
       if (apkUrl && apkUrl !== '#') {
-        window.location.href = apkUrl;
+        const link = document.createElement('a');
+        link.href = apkUrl;
+        link.setAttribute('download', 'SmartCricket.apk');
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
     },
     [releaseData]
