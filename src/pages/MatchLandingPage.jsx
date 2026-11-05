@@ -23,26 +23,19 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
   const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
 
+  const fallbackWebUrl = encodeURIComponent(`https://smartcricket-website.web.app/match/${cleanMatchId}`);
+  const chromeIntentUri = `intent://match/${cleanMatchId}#Intent;scheme=smartcricket;package=com.smartcricket.app;S.browser_fallback_url=${fallbackWebUrl};end;`;
+
   // 1. Attempt deep link on mobile phone
   useEffect(() => {
     const isAndroid = /android/i.test(navigator.userAgent);
-    if (isAndroid) {
-      // Attempt to open installed app with match ID
-      const appUri = `smartcricket://match/${encodeURIComponent(cleanMatchId)}`;
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = appUri;
-      document.body.appendChild(iframe);
-
-      const timer = setTimeout(() => {
-        if (document.body.contains(iframe)) {
-          document.body.removeChild(iframe);
-        }
-      }, 1500);
-
-      return () => clearTimeout(timer);
+    const hasAttempted = sessionStorage.getItem(`attempted_deeplink_${cleanMatchId}`);
+    if (isAndroid && !hasAttempted) {
+      sessionStorage.setItem(`attempted_deeplink_${cleanMatchId}`, 'true');
+      // Direct navigation to Android Chrome Intent triggers app if installed, or stays on fallback URL
+      window.location.href = chromeIntentUri;
     }
-  }, [cleanMatchId]);
+  }, [cleanMatchId, chromeIntentUri]);
 
   // 2. Track scroll to enforce "scroll complete page to download"
   useEffect(() => {
@@ -155,14 +148,23 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
               Full ball-by-ball commentary, live wagon wheels, and instant telemetry stream exclusively inside the <strong>SmartCricket Android App</strong>.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={scrollToBottom}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-white font-semibold text-xs shrink-0 shadow-sm hover:bg-accent-hover transition-colors"
-          >
-            <span>Scroll to Download</span>
-            <ChevronDown className="w-4 h-4 animate-bounce" />
-          </button>
+          <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <a
+              href={chromeIntentUri}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-white font-semibold text-xs shadow-sm hover:bg-accent-hover transition-colors"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span>Open in App</span>
+            </a>
+            <button
+              type="button"
+              onClick={scrollToBottom}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-surface border border-border text-ink font-semibold text-xs shadow-sm hover:border-accent transition-colors"
+            >
+              <span>Scroll to Download</span>
+              <ChevronDown className="w-4 h-4 animate-bounce text-accent" />
+            </button>
+          </div>
         </div>
       </div>
 
