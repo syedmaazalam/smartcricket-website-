@@ -6,7 +6,7 @@ export default function UpdateNotificationBanner({ releaseData, onDownload }) {
   const [isVisible, setIsVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
-  const versionName = releaseData?.versionName || '1.0';
+  const versionName = releaseData?.versionName || '1.3';
   const notes = releaseData?.notes || 'New performance enhancements and live streaming optimizations.';
   const alertMessage = releaseData?.alertMessage || `SmartCricket v${versionName} is here! Update now for the latest match scoring features.`;
   const isForce = !!releaseData?.force;

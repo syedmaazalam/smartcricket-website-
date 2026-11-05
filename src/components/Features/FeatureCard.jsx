@@ -1,26 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'motion/react';
 
 export default function FeatureCard({ icon: Icon, tag, title, description, index }) {
   const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const spotlightRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || !spotlightRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    spotlightRef.current.style.background = `radial-gradient(400px circle at ${x}px ${y}px, rgba(37, 99, 235, 0.07), transparent 80%)`;
   };
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -28,14 +24,10 @@ export default function FeatureCard({ icon: Icon, tag, title, description, index
       whileHover={{ y: -4 }}
       className="relative rounded-2xl bg-white border border-border p-8 transition-all duration-300 hover:border-accent overflow-hidden group flex flex-col justify-between"
     >
-      {/* Desktop Cursor Following Spotlight */}
+      {/* Desktop Cursor Following Spotlight — Direct DOM gradient, 0 React re-renders */}
       <div
+        ref={spotlightRef}
         className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-0 group-hover:opacity-100 hidden sm:block"
-        style={{
-          background: isHovered
-            ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(37, 99, 235, 0.06), transparent 80%)`
-            : 'none',
-        }}
       />
 
       <div>

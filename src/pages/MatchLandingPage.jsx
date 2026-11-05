@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   ArrowLeft,
   Sparkles,
+  Loader2,
 } from 'lucide-react';
 import { buttonHover, buttonTap } from '../lib/motion';
 
@@ -22,6 +23,24 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
 
   const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [isOpeningApp, setIsOpeningApp] = useState(false);
+
+  const handleDownloadClick = async (e) => {
+    setIsDownloading(true);
+    try {
+      if (onDownload) {
+        await onDownload(e);
+      }
+    } finally {
+      setTimeout(() => setIsDownloading(false), 2000);
+    }
+  };
+
+  const handleOpenAppClick = () => {
+    setIsOpeningApp(true);
+    setTimeout(() => setIsOpeningApp(false), 2500);
+  };
 
   const fallbackWebUrl = encodeURIComponent(`https://smartcricket-website.web.app/match/${cleanMatchId}`);
   const chromeIntentUri = `intent://match/${cleanMatchId}#Intent;scheme=smartcricket;package=com.smartcricket.app;S.browser_fallback_url=${fallbackWebUrl};end;`;
@@ -151,10 +170,15 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
           <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
             <a
               href={chromeIntentUri}
+              onClick={handleOpenAppClick}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-white font-semibold text-xs shadow-sm hover:bg-accent-hover transition-colors"
             >
-              <Smartphone className="w-4 h-4" />
-              <span>Open in App</span>
+              {isOpeningApp ? (
+                <Loader2 className="w-4 h-4 animate-spin text-white" />
+              ) : (
+                <Smartphone className="w-4 h-4" />
+              )}
+              <span>{isOpeningApp ? 'Opening App...' : 'Open in App'}</span>
             </a>
             <button
               type="button"
@@ -287,7 +311,7 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
               : 'Scroll to bottom to activate APK download'}
           </h2>
           <p className="text-xs sm:text-sm text-muted">
-            Version {releaseData?.versionName || '1.0'} • {releaseData?.fileSize || '4.4 MB'} • Direct download
+            Version {releaseData?.versionName || '1.3'} • {releaseData?.fileSize || '4.63 MB'} • Direct download
           </p>
         </div>
 
@@ -295,13 +319,17 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
           {hasScrolledToBottom ? (
             <motion.button
               type="button"
-              onClick={onDownload}
+              onClick={handleDownloadClick}
               whileHover={buttonHover}
               whileTap={buttonTap}
               className="inline-flex items-center gap-3 px-8 py-4 min-h-[48px] rounded-2xl bg-accent text-white font-bold text-base shadow-xl shadow-accent/30 hover:bg-accent-hover transition-all animate-pulse"
             >
-              <ArrowDownToLine className="w-5 h-5" />
-              <span>Download SmartCricket APK</span>
+              {isDownloading ? (
+                <Loader2 className="w-5 h-5 animate-spin text-white" />
+              ) : (
+                <ArrowDownToLine className="w-5 h-5" />
+              )}
+              <span>{isDownloading ? 'Starting Download...' : 'Download SmartCricket APK'}</span>
             </motion.button>
           ) : (
             <button

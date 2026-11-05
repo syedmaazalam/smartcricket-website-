@@ -17,30 +17,51 @@ export default function Navbar({ releaseData, onDownload }) {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+    let ticking = false;
 
-      if (location.pathname === '/') {
-        const sections = ['hero', 'features', 'showcase', 'install', 'faq'];
-        for (const sectionId of sections) {
-          const el = document.getElementById(sectionId);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 180 && rect.bottom >= 180) {
-              setActiveSection(sectionId);
-              break;
-            }
-          }
-        }
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isOver20 = window.scrollY > 20;
+          setScrolled((prev) => (prev !== isOver20 ? isOver20 : prev));
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+
+    if (location.pathname !== '/') {
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+
+    // Zero-lag native IntersectionObserver for active section tracking
+    const sectionIds = ['hero', 'features', 'showcase', 'install', 'faq'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, [location.pathname]);
 
   const navLinks = [

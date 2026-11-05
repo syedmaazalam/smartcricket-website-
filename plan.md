@@ -312,6 +312,27 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
 
 ---
 
+## Phase 7 — Zero-Lag Performance Optimization (Preserving All Animations)
+
+- [x] **Chunk 7.1: Scroll & MouseMove Zero-Jank Optimization**
+  - Eliminate layout thrashing in `src/components/Navbar.jsx` by throttling section checks with `requestAnimationFrame` and passive `IntersectionObserver`.
+  - Eliminate React re-render churn in `src/components/Features/FeatureCard.jsx` by driving spotlight gradient via direct DOM styling (`ref`) instead of component state.
+  - Verification: Build & verify smooth 60fps scrolling and hover effects.
+
+- [ ] **Chunk 7.2: GPU Compositor Layer Acceleration & Scroll Throttling**
+  - Promote `BlobBackground.jsx` and `CTASection.jsx` pulse animations to isolated GPU compositor layers with `will-change: transform; transform: translate3d(0,0,0)`.
+  - Throttle scroll listener in `BackToTopButton.jsx` with passive debouncing.
+  - Verification: Vite build & compositor check.
+
+- [ ] **Chunk 7.3: Code-Splitting, Route Lazy Loading & Font Performance**
+  - Lazy load secondary routes (`MatchLandingPage`, `AdminBroadcastPage`, `PrivacyPage`, `TermsPage`) in `App.jsx` with `React.lazy` and lightweight `Suspense`.
+  - Dynamically import `qrcode` in `QrCodeModal.jsx` so it is only fetched on click.
+  - Configure Rollup manual chunking in `vite.config.js` to split vendor dependencies.
+  - Optimize font preloading and non-blocking delivery in `index.html`.
+  - Verification: Measure bundle size drop, build production bundle, and deploy to Firebase Hosting.
+
+---
+
 ## Open Questions for User (answer before "next" on Phase 1)
 
 1. **Hosting target name**: I'll use `smartcricket-website` (URL: `smartcricket-website.web.app`). Confirm or change.
