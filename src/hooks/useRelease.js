@@ -4,10 +4,10 @@ import { getLatestRelease } from '../lib/firestore';
 const STATIC_FALLBACK_RELEASE = {
   versionCode: 3,
   versionName: '1.3',
-  fileSize: '4.63 MB',
+  fileSize: '6.16 MB',
   releaseDate: 'November 2026',
-  apkUrl: 'https://github.com/syedmaazalam/cricket-scorer/releases/download/v1.3/SmartCricket.apk',
-  notes: 'Redesigned Home Screen with matches under search bar, mandatory bowler assignment, mid-over bowling changes, and live streaming.',
+  apkUrl: '/SmartCricket.apk',
+  notes: 'Registration OTP verification, duplicate email protection, forgot password reset flow, redesigned Home Screen with matches under search, mandatory bowler assignment, and mid-over bowler correction.',
   force: false,
 };
 
@@ -28,7 +28,7 @@ export function useRelease() {
             setReleaseData({
               versionCode: data.versionCode || 3,
               versionName: data.versionName || '1.3',
-              fileSize: data.fileSize || '4.63 MB',
+              fileSize: data.fileSize || '6.16 MB',
               releaseDate: data.releasedAt || data.releaseDate || 'November 2026',
               apkUrl: data.apkUrl || STATIC_FALLBACK_RELEASE.apkUrl,
               notes: data.notes || STATIC_FALLBACK_RELEASE.notes,

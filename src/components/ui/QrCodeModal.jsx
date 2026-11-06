@@ -12,7 +12,9 @@ export default function QrCodeModal({ apkUrl }) {
   const [loading, setLoading] = useState(false);
 
   const websiteUrl = 'https://smartcricket-website.web.app';
-  const downloadUrl = apkUrl || 'https://drive.usercontent.google.com/download?id=1ddi2Wws_dbTjswFrdqB2DK6FgzpB1341&export=download&confirm=t';
+  const downloadUrl = (apkUrl && !apkUrl.startsWith('#'))
+    ? (apkUrl.startsWith('http') ? apkUrl : `https://smartcricket-website.web.app${apkUrl}`)
+    : 'https://smartcricket-website.web.app/SmartCricket.apk';
   const targetUrl = qrMode === 'download' ? downloadUrl : websiteUrl;
 
   useEffect(() => {

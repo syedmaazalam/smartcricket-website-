@@ -17,16 +17,15 @@ import { doc, setDoc } from 'firebase/firestore';
 export default function AdminBroadcastPage({ releaseData }) {
   const [versionName, setVersionName] = useState(releaseData?.versionName || '1.3');
   const [versionCode, setVersionCode] = useState(releaseData?.versionCode || 3);
-  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '4.63 MB');
+  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '6.16 MB');
   const [apkUrl, setApkUrl] = useState(
-    releaseData?.apkUrl ||
-      'https://github.com/syedmaazalam/cricket-scorer/releases/download/v1.3/SmartCricket.apk'
+    releaseData?.apkUrl || '/SmartCricket.apk'
   );
   const [alertMessage, setAlertMessage] = useState(
-    'Time to update SmartCricket! Install the latest build for enhanced match scorecards and faster live sync.'
+    'Time to update SmartCricket! Install the latest v1.3 build with registration OTP, forgot password, and live sync.'
   );
   const [notes, setNotes] = useState(
-    'Real-time wagon wheels, faster over comparison, and MCC law updates.'
+    'Registration OTP verification, duplicate account prevention, forgot password reset flow, and redesigned home screen.'
   );
   const [force, setForce] = useState(false);
 
