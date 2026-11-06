@@ -225,7 +225,7 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
             </div>
             <h3 className="font-semibold text-sm text-ink">100% Free & No Ads</h3>
             <p className="text-xs text-muted leading-relaxed">
-              Lightweight 6.16 MB app. No subscription fees, no popups, no account required to watch.
+              Lightweight fast app. No subscription fees, no popups, no account required to watch.
             </p>
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
               : 'Scroll to bottom to activate APK download'}
           </h2>
           <p className="text-xs sm:text-sm text-muted">
-            Version {releaseData?.versionName || '1.3'} • {releaseData?.fileSize || '6.16 MB'} • Direct download
+            Version {releaseData?.versionName || '1.3'} • {releaseData?.fileSize || '27.3 MB'} • Direct download
           </p>
         </div>
 

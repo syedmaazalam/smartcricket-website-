@@ -17,7 +17,7 @@ import { doc, setDoc } from 'firebase/firestore';
 export default function AdminBroadcastPage({ releaseData }) {
   const [versionName, setVersionName] = useState(releaseData?.versionName || '1.3');
   const [versionCode, setVersionCode] = useState(releaseData?.versionCode || 3);
-  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '6.16 MB');
+  const [fileSize, setFileSize] = useState(releaseData?.fileSize || '27.3 MB');
   const [apkUrl, setApkUrl] = useState(
     releaseData?.apkUrl || '/SmartCricket.apk'
   );

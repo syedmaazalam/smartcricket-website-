@@ -7,7 +7,7 @@ import { buttonHover, buttonTap } from '../../lib/motion';
 export default function CTASection({ releaseData, loading, onDownload }) {
   const shouldReduceMotion = useReducedMotion();
   const version = releaseData?.versionName || '1.3';
-  const fileSize = releaseData?.fileSize || '4.63 MB';
+  const fileSize = releaseData?.fileSize || '27.3 MB';
   const apkUrl = releaseData?.apkUrl;
 
   const handleDownloadClick = (e) => {

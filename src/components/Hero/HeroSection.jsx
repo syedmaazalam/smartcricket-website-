@@ -10,7 +10,7 @@ export default function HeroSection({ releaseData, loading, onDownload }) {
   const shouldReduceMotion = useReducedMotion();
   const [isDownloading, setIsDownloading] = useState(false);
   const version = releaseData?.versionName || '1.3';
-  const fileSize = releaseData?.fileSize || '4.63 MB';
+  const fileSize = releaseData?.fileSize || '27.3 MB';
   const apkUrl = releaseData?.apkUrl;
 
   const handleDownloadClick = async (e) => {
@@ -77,7 +77,7 @@ export default function HeroSection({ releaseData, loading, onDownload }) {
                 ) : (
                   <ArrowDownToLine className="w-5 h-5 transition-transform group-hover:translate-y-0.5" />
                 )}
-                <span>{isDownloading ? 'Starting Download...' : `Download APK (${fileSize})`}</span>
+                <span>{isDownloading ? 'Starting Download...' : 'Download APK'}</span>
               </motion.a>
 
               {/* QR Code trigger on desktop */}
@@ -101,7 +101,7 @@ export default function HeroSection({ releaseData, loading, onDownload }) {
               ) : (
                 <div className="flex items-center gap-1.5 font-medium text-ink">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>v{version} Release</span>
+                  <span>v{version} Release • {fileSize}</span>
                 </div>
               )}
               <span>•</span>
