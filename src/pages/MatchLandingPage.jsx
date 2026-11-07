@@ -311,7 +311,7 @@ export default function MatchLandingPage({ releaseData, onDownload }) {
               : 'Scroll to bottom to activate APK download'}
           </h2>
           <p className="text-xs sm:text-sm text-muted">
-            Version {releaseData?.versionName || '1.3'} • {releaseData?.fileSize || '27.3 MB'} • Direct download
+            Version {releaseData?.versionName || '1.3'} • {releaseData?.fileSize || '5.6 MB'} • Direct download
           </p>
         </div>
 

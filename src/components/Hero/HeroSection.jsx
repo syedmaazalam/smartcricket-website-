@@ -10,7 +10,7 @@ export default function HeroSection({ releaseData, loading, onDownload }) {
   const shouldReduceMotion = useReducedMotion();
   const [isDownloading, setIsDownloading] = useState(false);
   const version = releaseData?.versionName || '1.3';
-  const fileSize = releaseData?.fileSize || '27.3 MB';
+  const fileSize = releaseData?.fileSize || '5.6 MB';
   const apkUrl = releaseData?.apkUrl;
 
   const handleDownloadClick = async (e) => {
