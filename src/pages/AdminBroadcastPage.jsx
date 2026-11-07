@@ -13,6 +13,8 @@ import {
 import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 
 export default function AdminBroadcastPage({ releaseData }) {
   const [versionName, setVersionName] = useState(releaseData?.versionName || '1.3.1');
@@ -60,7 +62,6 @@ export default function AdminBroadcastPage({ releaseData }) {
           text: `Update Broadcast Published! Version ${payload.versionName} is now live in Firestore.`,
         });
       } else {
-        // Fallback for offline / demo mode
         localStorage.setItem('sc_local_release', JSON.stringify(payload));
         setStatusMessage({
           type: 'success',
@@ -79,7 +80,7 @@ export default function AdminBroadcastPage({ releaseData }) {
   };
 
   return (
-    <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto space-y-8">
+    <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto space-y-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <Link
@@ -89,12 +90,12 @@ export default function AdminBroadcastPage({ releaseData }) {
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1.5 duration-200" />
           <span>Back to SmartCricket</span>
         </Link>
-        <span className="px-3 py-1 rounded-full bg-accent/10 text-accent font-mono text-xs font-bold">
+        <Badge variant="glass" className="font-mono text-xs font-bold text-accent">
           Manager Portal
-        </span>
+        </Badge>
       </div>
 
-      <div className="bg-card rounded-3xl border border-border p-6 sm:p-10 shadow-sm space-y-6">
+      <div className="glass-card rounded-[32px] border border-white/90 p-6 sm:p-10 shadow-glass space-y-6">
         <div className="space-y-1">
           <div className="flex items-center gap-2.5 text-accent">
             <Bell className="w-6 h-6" />
@@ -102,7 +103,7 @@ export default function AdminBroadcastPage({ releaseData }) {
               App Update Broadcast System
             </h1>
           </div>
-          <p className="text-xs sm:text-sm text-muted">
+          <p className="text-xs sm:text-sm text-muted font-sans">
             Send an update notification to all mobile app users and website visitors.
           </p>
         </div>
@@ -197,7 +198,7 @@ export default function AdminBroadcastPage({ releaseData }) {
 
           <div>
             <label className="block text-xs font-semibold text-ink mb-1.5">
-              Changelog & Notes
+              Changelog &amp; Notes
             </label>
             <textarea
               rows={2}
@@ -209,7 +210,7 @@ export default function AdminBroadcastPage({ releaseData }) {
           </div>
 
           {/* Mandatory Force Switch */}
-          <div className="p-4 rounded-2xl bg-surface/30 border border-border flex items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-surface/40 border border-blue-100 flex items-center justify-between gap-4">
             <div>
               <span className="font-semibold text-xs text-ink block">
                 Mandatory / Force Update
@@ -230,10 +231,12 @@ export default function AdminBroadcastPage({ releaseData }) {
           </div>
 
           <div className="pt-2 flex items-center justify-end gap-3">
-            <button
+            <Button
               type="submit"
+              variant="glow"
+              size="default"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-xl bg-accent text-white font-bold text-sm shadow-md hover:bg-accent-hover transition-colors disabled:opacity-50"
+              className="px-6 font-bold text-sm"
             >
               {saving ? (
                 <>
@@ -246,7 +249,7 @@ export default function AdminBroadcastPage({ releaseData }) {
                   <span>Broadcast Update Notification</span>
                 </>
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

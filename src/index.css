@@ -5,12 +5,18 @@
 :root {
   --bg: #F0F7FF;
   --surface: #DBEAFE;
+  --surface-subtle: #EFF6FF;
   --secondary: #60A5FA;
   --accent: #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-glow: rgba(37, 99, 235, 0.25);
   --ink: #0B1F3B;
   --muted: #475569;
   --card: #FFFFFF;
+  --card-glass: rgba(255, 255, 255, 0.85);
   --border: rgba(11, 31, 59, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.7);
+  --border-accent: rgba(37, 99, 235, 0.2);
 }
 
 html {
@@ -28,6 +34,49 @@ body {
   overflow-x: hidden;
   background-color: var(--bg);
   color: var(--ink);
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(96, 165, 250, 0.09) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(37, 99, 235, 0.06) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Glassmorphism primitives */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px -4px rgba(11, 31, 59, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -4px rgba(11, 31, 59, 0.05), 0 0 0 1px rgba(37, 99, 235, 0.04);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 36px -6px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 10px -2px rgba(11, 31, 59, 0.04);
+}
+
+.glow-accent {
+  box-shadow: 0 0 30px -4px rgba(37, 99, 235, 0.35);
 }
 
 /* Custom utility for active underlines */

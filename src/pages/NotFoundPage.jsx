@@ -1,31 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, HelpCircle } from 'lucide-react';
-import { motion } from 'motion/react';
-import { buttonHover, buttonTap } from '../lib/motion';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-28 text-center">
-      <div className="max-w-md mx-auto space-y-6">
-        <div className="w-16 h-16 rounded-2xl bg-surface text-accent flex items-center justify-center mx-auto shadow-xs">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-28 text-center">
+      <div className="max-w-md mx-auto glass-card rounded-[36px] p-8 sm:p-12 border border-white/90 shadow-2xl space-y-6">
+        <div className="w-16 h-16 rounded-3xl bg-surface/80 text-accent flex items-center justify-center mx-auto shadow-xs border border-white">
           <HelpCircle className="w-8 h-8" />
         </div>
 
-        <span className="text-xs font-bold uppercase tracking-wider text-accent">
-          Error 404
-        </span>
+        <div>
+          <Badge variant="glass" className="text-xs font-mono font-bold text-accent mb-3">
+            Error 404
+          </Badge>
 
-        <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-tight">
-          Page Not Found
-        </h1>
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-ink tracking-tight">
+            Page Not Found
+          </h1>
+        </div>
 
-        <p className="text-muted text-base leading-relaxed">
+        <p className="text-muted text-sm sm:text-base leading-relaxed font-sans">
           The page or match code you are looking for does not exist or has been moved.
         </p>
 
         <div className="pt-2">
-          <motion.div whileHover={buttonHover} whileTap={buttonTap} className="inline-block">
+          <Button asChild variant="glow" size="lg" className="rounded-2xl">
             <Link
               to="/"
               onClick={() => {
@@ -33,12 +35,11 @@ export default function NotFoundPage() {
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-xl bg-accent text-white font-semibold text-sm shadow-md hover:bg-accent-hover transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Home</span>
             </Link>
-          </motion.div>
+          </Button>
         </div>
       </div>
     </div>

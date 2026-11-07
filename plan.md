@@ -333,8 +333,48 @@ Loaded from `public/screenshots/` with placeholder frames until images are provi
 
 ---
 
-## Open Questions for User (answer before "next" on Phase 1)
+---
 
-1. **Hosting target name**: I'll use `smartcricket-website` (URL: `smartcricket-website.web.app`). Confirm or change.
-2. **APK hosting**: Will the APK be on Firebase Storage (free-tier public URL) or another host? I'll put a placeholder in Firestore; just confirm so I wire the right URL pattern.
-3. **Privacy Policy / Terms pages**: Do you have content for these, or should I add placeholder anchor-linked modal/sections in the footer?
+## UI Redesign Plan (Branch: `ui-redesign`)
+
+- [x] **Phase 1: Audit & Discovery**
+  - Project review (Vite, React 19, Tailwind, Motion, Firebase)
+  - Verify styling tokens & brand palette
+  - Initialize shadcn/ui configuration with `@/` path alias and base dependencies
+  - Identify key UI improvements and formulate phased redesign strategy
+
+- [x] **Phase 2: Design System Foundation**
+  - Setup unified color tokens (Primary `#0B1F3B`, Accent `#2563EB`, Secondary `#60A5FA`, Surface `#DBEAFE`, Background `#F0F7FF`)
+  - Create reusable glassmorphism & subtle gradient elevation utility classes in `src/index.css`
+  - Extend `tailwind.config.js` with consistent border radiuses, soft ambient shadows, and glass backdrop filters
+  - Build core shadcn/Radix-compatible UI primitives in `src/components/ui/`:
+    - `button.jsx` (with variants: `default`, `outline`, `secondary`, `ghost`, `glass`, `glow`)
+    - `card.jsx` (Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter)
+    - `badge.jsx` (Badge with variants: `default`, `secondary`, `accent`, `outline`, `success`, `glass`)
+    - `accordion.jsx` (Accessible collapsible accordion for FAQs)
+    - `dialog.jsx` (Accessible modal dialog primitives for QR modal)
+  - Verify component compilation and build passing with zero errors
+
+- [x] **Phase 3: Page & Component Redesign**
+  - Redesign Navbar with floating frosted glass header, glowing active indicator, and sleek mobile drawer
+  - Redesign Hero section with ambient glowing mesh gradient, floating device frame, and high-impact CTA
+  - Redesign Features section with glassy bento cards, cursor spotlight, and vibrant category tags
+  - Redesign Showcase / Carousel section with refined device mockups, smooth navigation, and crisp pagination
+  - Redesign Install section with responsive connected roadmap steps and warning highlights
+  - Redesign FAQ section using new Accordion primitives with smooth expansion
+  - Redesign CTA section with prominent frosted card, glowing pulse-ring action, and QR code integration
+  - Redesign Footer with clean hierarchy, categorized navigation links, and developer attribution
+  - Redesign Secondary Pages: `MatchLandingPage`, `AdminBroadcastPage`, `PrivacyPage`, `TermsPage`, `NotFoundPage`
+
+- [x] **Phase 4: Motion & Micro-interactions**
+  - Refined Framer Motion scroll fade-up animations and staggered reveals
+  - Button and card hover/tap physics with spring response
+  - Subtle floating and pulse animations for live status indicators
+  - Full `prefers-reduced-motion` compliance
+
+- [x] **Phase 5: Quality, Polish & Verification**
+  - Comprehensive responsive verification across mobile (360px+), tablet, and desktop
+  - Verification of zero layout shift (CLS), contrast ratios, and touch targets (min 44px)
+  - Full production build verification with `npm run build`
+  - List of all modified files and deployment notes
+

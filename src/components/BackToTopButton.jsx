@@ -39,7 +39,7 @@ export default function BackToTopButton() {
           whileTap={{ scale: 0.94 }}
           transition={{ duration: 0.2 }}
           aria-label="Scroll to top of page"
-          className="fixed bottom-6 right-6 z-40 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-accent text-white shadow-lg shadow-accent/25 hover:bg-accent-hover flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl bg-accent text-white shadow-glow hover:bg-accent-hover flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 border border-white/40"
         >
           <ArrowUp className="w-5 h-5 transition-transform group-hover:-translate-y-0.5" />
         </motion.button>
